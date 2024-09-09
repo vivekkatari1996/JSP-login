@@ -19,9 +19,6 @@ import databases.loginDao;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uname = request.getParameter("uname");
 		String pass = request.getParameter("pass");
@@ -29,24 +26,22 @@ public class Login extends HttpServlet {
 		
 		
 		
-		  try {
-	            if(dao.check(uname, pass)) {
-	                HttpSession session = request.getSession();
-	                session.setAttribute("username", uname);
-	                response.sendRedirect("welcome.jsp");
-	            } else {
-	                response.sendRedirect("not working");
-	            }
-	        } catch (SQLException e) {
-	            // Log the error (optional) and redirect to an error page
-	           System.out.println("not working");
-	        }
-						
-		
-		
-	
-
+		try {
+			if (dao.check(uname,pass)) {
+				// Set session attribute to store user information
+				 // Store the username in the session
+				HttpSession session = request.getSession();
+				session.setAttribute("username", uname);
+				// Redirect to welcome.jsp page upon successful login
+				response.sendRedirect("welcome.jsp");
+			} else {
+				// Redirect to an error page if login fails
+				response.sendRedirect("error.jsp");  // Or create a custom error page
+			}
+		} catch (SQLException e) {
+			// Log the error and redirect to an error page
+			e.printStackTrace();  // It's good to log the exception for debugging
+			response.sendRedirect("error.jsp");  // You can redirect to a general error page
+		}
 	}
-
-
 }
