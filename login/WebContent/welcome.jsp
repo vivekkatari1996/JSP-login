@@ -16,8 +16,12 @@ if(session.getAttribute("username")== null){
 
 %> 
 hello world
-<video src="https://www.youtube.com/watch?v=P33qQO4-b9I&ab_channel=YbrantBhakti" autofocus="autofocus" width="100%" height="100%"></video>
+<a href="video.jsp">video</a>
 video is playing
+
+<form action="logout">
+<input type="submit" value="logout">
+</form>
 
 </body>
 </html>
